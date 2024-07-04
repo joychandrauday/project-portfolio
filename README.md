@@ -1,6 +1,6 @@
 # Portfolio Website: Joy Chandra Uday
 
-Welcome to my portfolio website! This repository contains the codebase for my personal portfolio showcasing my skills and projects. Explore the live site [here](https://stayvista-live.web.app/).
+Welcome to my portfolio website! This repository contains the codebase for my personal portfolio showcasing my skills and projects.
 
 ## Important Links
 
