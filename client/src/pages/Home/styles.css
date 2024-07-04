@@ -1,0 +1,31 @@
+.react-tabs__tab--selected{
+    background-color: #1F1F1F !important ;
+    color: yellow !important;
+    border-bottom: none !important;
+}
+.react-tabs__tab{
+    background-color: #1a1919;
+    border-radius: 0;
+    color: gray;
+    padding: 10px 30px;
+    bottom: 0px !important;
+    border-bottom: 1px solid gray ;
+}
+.react-tabs__tab-list{
+    border-bottom: none !important;
+    
+    background-color: #1a1919;
+}
+.react-tabs__tab:focus:after{
+    display: none;
+}
+.skill-item {
+    transition: transform 0.5s ease;
+    will-change: transform;
+  }
+  .slick-list{
+    height: 100vh !important;
+  }
+  .slick-next{
+    right: 0 !important;
+  }
