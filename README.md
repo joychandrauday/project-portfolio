@@ -1,13 +1,11 @@
 # Portfolio Website: Joy Chandra Uday
 
-Welcome to my portfolio website! This repository contains the codebase for my personal portfolio showcasing my skills and projects. Explore the live site [here](https://stayvista-live.web.app/).
+Welcome to my portfolio website! This repository contains the codebase for my personal portfolio showcasing my skills and projects.
 
 ## Important Links
 
-- [Portfolio Website](https://stayvista-live.web.app/)
-- [GitHub Repository](https://github.com/shakilahmedatik/b9-stayVista-part1)
+- [Portfolio Website](https://joychandrauday.web.app/)
 - [LinkedIn Profile](https://linkedin.com/in/joychandrauday)
-- [Resume](https://drive.google.com/your-resume-link)
 
 ## Projects Featured
 
@@ -18,7 +16,7 @@ StayVista is a dynamic accommodation booking platform. This template includes:
 - **Part 1:** Introduction, MongoDB setup, server-side development, category filtering, and more.
 - **Part 2:** Dashboard layout, room management, user registration, and API integration.
 - **Part 3:** Role-based access, profile management, secure routes, and booking functionalities.
-- **Part 4:** Payment integration with Stripe, email sending with NodeMailer, statistics dashboard, and more.
+- **Part 4:** Payment integration with Stripe, email sending with mailjs, statistics dashboard, and more.
 
 ### Project 2: Custom Website Development
 
