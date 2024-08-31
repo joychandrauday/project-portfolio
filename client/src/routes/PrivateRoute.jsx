@@ -8,8 +8,8 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation()
 
   if (loading) return <LoadingSpinner />
-  if (user) return children
-  return <Navigate to='/login' state={location.pathname} replace='true' />
+  if (user?.email==="joychandraud@gmail.com") return children
+  return <Navigate to='/signin' state={location.pathname} replace='true' />
 }
 
 PrivateRoute.propTypes = {

@@ -1,87 +1,44 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "./../../hooks/useAxiosPublic";
 import { FaCopy } from "react-icons/fa";
 import "../../components/Shared/Navbar/styles.css";
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "Bengal Trails",
-      coverImage: "https://i.ibb.co/DWcyZP8/Screenshot-2024-07-04-030651.png",
-      description:
-        "Welcome to Bengal Trails, your comprehensive resource for exploring the wonders of Bangladesh. Our mission is to help travelers discover both famous landmarks and hidden gems, ensuring a rich and unforgettable travel experience.",
-      liveLink: "https://bengaltrails-7a35f.web.app/",
-      clientCodeLink: "https://github.com/joychandrauday/bengaltrails-client",
-      serverCodeLink: "https://github.com/joychandrauday/bengaltrails-server",
-      underDevelopment: false,
-      features: {
-        feature1:
-          "Book your travel plans directly through our website with convenient payment options and instant confirmation.",
-        feature2:
-          "Receive personalized travel itineraries based on your interests and budget.",
-        feature3:
-          "Engage with other travel enthusiasts in our community forums to exchange tips, stories, and advice.",
-      },
-      usedTechnologies: [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "Tailwind CSS",
-      ],
+  const axiosPublic=useAxiosPublic()
+  const {
+    data: projects,
+    isLoading,
+    isError,
+    refetch
+  } = useQuery({
+    queryKey: [
+      "projects",
+    ],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/projects");
+      return res.data;
     },
-    {
-      title: "Booker's Den",
-      coverImage: "https://i.ibb.co/k3v5tVq/Screenshot-2024-07-04-030827.png",
-      description:
-        "Bookers Den is a library website to manage books and forums. One can borrow books. There is a librarian role who manage all the books.",
-      liveLink: "https://bengaltrails.web.app/",
-      clientCodeLink: "https://github.com/joychandrauday/BookersDen-client",
-      serverCodeLink: "https://github.com/joychandrauday/bookersden-server/",
-      underDevelopment: false,
-      features: {
-        feature1:
-          "Borrow books directly from our website and enjoy hassle-free delivery to your doorstep.",
-        feature2:
-          "Browse through a vast collection of books spanning various genres, from classic literature to contemporary bestsellers.",
-        feature3:
-          "Read reviews from fellow book enthusiasts and leave your own ratings to help others discover their next great read.",
-      },
-      usedTechnologies: [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "Tailwind CSS",
-      ],
-    },
-    {
-      title: "Path Chokro",
-      coverImage: "https://i.ibb.co/x1tFS4K/Screenshot-2024-07-04-031102.png",
-      description:
-        "Path Chokro is a library website to manage books and forums. One can borrow books. There is a librarian role who manage all the books.",
-      liveLink: "https://pathchokro-5e1d8.web.app/",
-      clientCodeLink: "https://github.com/joychandrauday/PathChokro",
-      serverCodeLink: "",
-      underDevelopment: true,
-      features: {
-        feature1:
-          "Borrow books directly from our website and enjoy hassle-free delivery to your doorstep.",
-        feature2:
-          "Browse through a vast collection of books spanning various genres, from classic literature to contemporary bestsellers.",
-        feature3:
-          "Read reviews from fellow book enthusiasts and leave your own ratings to help others discover their next great read.",
-      },
-      usedTechnologies: [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "Tailwind CSS",
-        "Firebase",
-      ],
-    },
-  ];
+    keepPreviousData: true,
+  });
 
+  if (isLoading) {
+    refetch()
+    return (
+      <div className="min-h-screen flex items-center justify-center backdrop-blur">
+        <div className="wraap">
+          <div className="loading loading-ball loading-lg"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="text-center text-red-600">
+        Error fetching products data
+      </div>
+    );
+  }
   return (
     <div className="container mx-auto py-8 px-4 lg:pt-24 lg:pl-24">
       <div className="gap-2 font-bold flex items-center uppercase font-noto text-2xl">
@@ -110,8 +67,7 @@ const Projects = () => {
                     className=" hover:bg-yellow-400 "
                   >
                     <button className="btn bg-primary text-yellow-400 rounded-none  hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400">
-
-                    Live Link
+                      Live Link
                     </button>
                   </a>
                   <a
@@ -121,8 +77,7 @@ const Projects = () => {
                     className=" hover:bg-yellow-400 "
                   >
                     <button className="btn bg-primary text-yellow-400 rounded-none  hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400">
-                    Client Code
-                      
+                      Client Code
                     </button>
                   </a>
                   {project.serverCodeLink && (
@@ -133,8 +88,7 @@ const Projects = () => {
                       className=" hover:bg-yellow-400 "
                     >
                       <button className="btn bg-primary text-yellow-400 rounded-none  hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400">
-
-                      Server Code
+                        Server Code
                       </button>
                     </a>
                   )}

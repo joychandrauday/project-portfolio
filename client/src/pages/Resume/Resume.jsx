@@ -111,7 +111,7 @@ const Resume = () => {
                   <div className="w-3 h-3 bg-blue-600 rounded-full mr-2"></div>
                   <p className="text-sm text-gray-400">{education.year}</p>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                <h3 className="text-lg font-semibold text-gray-300 dark:text-white mb-1">
                   {education.degree}
                 </h3>
                 <p className="text-base text-gray-500 dark:text-gray-400 mb-2">
@@ -153,7 +153,7 @@ const Resume = () => {
                   <div className="w-3 h-3 bg-green-600 rounded-full mr-2"></div>
                   <p className="text-sm text-gray-400">{experience.year}</p>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                <h3 className="text-lg font-semibold text-gray-300 dark:text-white mb-1">
                   {experience.role}
                 </h3>
                 <p className="text-base text-gray-500 dark:text-gray-400 mb-2">
@@ -174,7 +174,7 @@ const Resume = () => {
               href="https://linkedin.com/in/joychandrauday"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn bg-primary text-yellow-400 rounded-none hover:border border-yellow-400"
+              className="btn hover:bg-warning hover:text-black bg-primary text-yellow-400 rounded-none hover:border border-yellow-400"
             >
               <FaLinkedin className="mr-2" />
               Linkedin
@@ -183,7 +183,7 @@ const Resume = () => {
               href="https://github.com/joychandrauday"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn bg-primary text-yellow-400 rounded-none hover:border border-yellow-400"
+              className="btn hover:bg-warning hover:text-black bg-primary text-yellow-400 rounded-none hover:border border-yellow-400"
             >
               <FaGithub className="mr-2" />
               Github
@@ -192,7 +192,7 @@ const Resume = () => {
               href="https://facebook.com/joychandraudayy"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn bg-primary text-yellow-400 rounded-none hover:border border-yellow-400"
+              className="btn hover:bg-warning hover:text-black bg-primary text-yellow-400 rounded-none hover:border border-yellow-400"
             >
               <FaFacebook className="mr-2" />
               Facebook

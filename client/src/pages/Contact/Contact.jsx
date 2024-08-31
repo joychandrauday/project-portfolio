@@ -29,8 +29,8 @@ const Contact = () => {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center lg:p-8 lg:pt-24 lg:pl-24">
-      <div className="bg-gradient-to-tr from-zinc-800 to-zinc-900 rounded-lg shadow-xl shadow-black lg:p-10 md:p-4 p-4 mx-auto flex flex-col lg:flex-row gap-16 w-4/5">
+    <section className="flex flex-col items-center justify-center  lg:pt-5 lg:pl-24">
+      <div className="bg-gradient-to-tr from-zinc-800 to-zinc-900 rounded-lg shadow-xl shadow-black lg:p-10 md:p-4 p-4 mx-auto flex flex-col lg:flex-row gap-16 w-full">
         <div className="lg:w-1/2">
           <h1 className="text-3xl font-bold text-center lg:text-right mb-4">Contact Me</h1>
           <p className="text-center lg:text-right text-gray-600 mb-8">

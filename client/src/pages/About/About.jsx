@@ -30,7 +30,7 @@ const About = () => {
                 rel="noopener noreferrer"
                 className="hover:bg-yellow-400 "
               >
-                <button className="btn bg-primary text-yellow-400 rounded-none  hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400">
+                <button className="btn hover:text-black bg-primary text-yellow-400 rounded-none  hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400">
                 <FaLinkedin />
                 LinkedIn
                 </button>
@@ -42,7 +42,7 @@ const About = () => {
                 rel="noopener noreferrer"
                 className="hover:bg-yellow-400 "
               >
-                <button className="btn bg-primary text-yellow-400 rounded-none  hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400">
+                <button className="btn hover:text-black bg-primary text-yellow-400 rounded-none  hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400">
                   <FaGithub />
                   Github
                 </button>
@@ -53,7 +53,7 @@ const About = () => {
                 rel="noopener noreferrer"
                 className="hover:bg-yellow-400 "
               >
-                <button className="btn bg-primary text-yellow-400 rounded-none  hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400">
+                <button className="btn hover:text-black bg-primary text-yellow-400 rounded-none  hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400">
                 <FaFacebook />
                 Facebook
                 </button>

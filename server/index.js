@@ -3,14 +3,14 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
 
 const port = process.env.PORT || 8000;
 
 // middleware
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:5174"],
+  origin: ["http://localhost:5173", "http://localhost:5174","https://joychandrauday.web.app"],
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -35,7 +35,6 @@ const verifyToken = async (req, res, next) => {
     next();
   });
 };
-
 const client = new MongoClient(process.env.DB_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -46,8 +45,12 @@ const client = new MongoClient(process.env.DB_URI, {
 
 async function run() {
   try {
-    await client.connect();
-    const usersCollection = client.db("your_database_name").collection("users");
+    const projectCollection = client
+      .db("portfolio-joychandrauday")
+      .collection("projects");
+    const blogCollection = client
+      .db("portfolio-joychandrauday")
+      .collection("blogs");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -80,7 +83,28 @@ async function run() {
         res.status(500).send(err);
       }
     });
-
+    //blogs
+    app.get("/blogs", async (req, res) => {
+      const cursor = blogCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    // create a new project
+    app.post("/projects", async (req, res) => {
+      const newProject = req.body;
+      await projectCollection.insertOne(newProject);
+      res
+        .status(201)
+        .json({ message: "Product added successfully", product: newProject });
+    });
+    // update a project
+    app.delete("/projects/:id", async (req, res) => {
+      const { id } = req.params;
+      const query = { _id : new ObjectId(id)};
+      
+      const result = await projectCollection.deleteOne(query);
+      res.send(result);
+    });
     // Save or modify user email, status in DB
     app.put("/users/:email", async (req, res) => {
       const email = req.params.email;
@@ -99,7 +123,12 @@ async function run() {
       );
       res.send(result);
     });
-
+    //projects
+    app.get("/projects", async (req, res) => {
+      const cursor = projectCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(

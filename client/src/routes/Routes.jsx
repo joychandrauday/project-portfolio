@@ -10,6 +10,8 @@ import Resume from "../pages/Resume/Resume";
 import SkilledStack from "../pages/skilled/SkilledStack";
 import Contact from "../pages/Contact/Contact";
 import Blog from "../pages/Blog/Blog";
+import ManageProjects from "../pages/AddProject/ManageProjects";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -49,11 +51,18 @@ export const router = createBrowserRouter([
         path: "/blog",
         element: <Blog />,
       },
-      { 
+      {
         path: "/signup",
-        element: <SignUp /> 
-
+        element: <SignUp />,
       },
     ],
+  },
+  {
+    path: "/manage-project",
+    element: (
+      <PrivateRoute>
+        <ManageProjects />
+      </PrivateRoute>
+    ),
   },
 ]);

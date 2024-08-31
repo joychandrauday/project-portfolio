@@ -1,5 +1,6 @@
 import React from "react";
 import { FaCopy, FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const HomeBannerElements = () => {
   return (
@@ -35,16 +36,15 @@ const HomeBannerElements = () => {
                 <FaGithub /> My Github
               </button>
             </a>
-            <a
-              href="/projects"
-              target="_blank"
+            <Link
+              to="/projects"
               rel="noopener noreferrer"
               className="hover:bg-yellow-400"
             >
               <button className="btn bg-primary text-yellow-400 rounded-none hover:translate-y-[-4px] hover:translate-x-1 hover:border hover:border-yellow-400 flex items-center gap-2">
                 <FaCopy /> Projects
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
