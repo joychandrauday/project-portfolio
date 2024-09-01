@@ -10,7 +10,11 @@ const port = process.env.PORT || 8000;
 
 // middleware
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:5174","https://joychandrauday.web.app"],
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://joychandrauday.web.app",
+  ],
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -83,12 +87,7 @@ async function run() {
         res.status(500).send(err);
       }
     });
-    //blogs
-    app.get("/blogs", async (req, res) => {
-      const cursor = blogCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
+
     // create a new project
     app.post("/projects", async (req, res) => {
       const newProject = req.body;
@@ -100,8 +99,8 @@ async function run() {
     // update a project
     app.delete("/projects/:id", async (req, res) => {
       const { id } = req.params;
-      const query = { _id : new ObjectId(id)};
-      
+      const query = { _id: new ObjectId(id) };
+
       const result = await projectCollection.deleteOne(query);
       res.send(result);
     });
@@ -128,6 +127,101 @@ async function run() {
       const cursor = projectCollection.find();
       const result = await cursor.toArray();
       res.send(result);
+    });
+    //blogs
+    app.get("/blogs", async (req, res) => {
+      const cursor = blogCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/blog/:slug", async (req, res) => {
+      try {
+        const { slug } = req.params;
+        const query = { slug: slug };
+
+        // Use findOne to get a single document
+        const blog = await blogCollection.findOne(query);
+
+        // Check if the blog post exists
+        if (!blog) {
+          return res.status(404).send({ message: "Blog not found" });
+        }
+
+        // Send the found blog post
+        res.send(blog);
+      } catch (error) {
+        // Handle any errors that occur during the operation
+        console.error("Error fetching blog:", error);
+        res.status(500).send({ message: "Server error" });
+      }
+    });
+    app.get("/blogs/:category", async (req, res) => {
+      try {
+        const { category } = req.params;
+        const query = { category: category };
+
+        // Use findOne to get a single document
+        const relatedBlogs = await blogCollection.find(query).toArray();
+
+        // Check if the blog post exists
+        if (!relatedBlogs) {
+          return res.status(404).send({ message: "Blogs not found" });
+        }
+
+        // Send the found blog post
+        res.send(relatedBlogs);
+      } catch (error) {
+        // Handle any errors that occur during the operation
+        console.error("Error fetching blog:", error);
+        res.status(500).send({ message: "Server error" });
+      }
+    });
+    // POST route to add a comment to a blog
+    app.post("/blog/:slug/comment", async (req, res) => {
+      const { slug } = req.params;
+      const { userName, email, image, comment } = req.body;
+
+      const newComment = {
+        userName,
+        email,
+        image,
+        comment,
+        commentDate: new Date().toISOString(), // Add current date and time
+      };
+
+      try {
+        const blog = await blogCollection.findOneAndUpdate(
+          { slug: slug },
+          { $push: { comments: newComment } },
+          { new: true } // Return the updated document
+        );
+
+        if (!blog) {
+          return res.status(404).json({ message: "Blog not found" });
+        }
+
+        res.status(200).json(blog);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error adding comment" });
+      }
+    });
+    // Example: Express.js route to increment view count
+    app.patch("/blog/:slug/view", async (req, res) => {
+      const { slug } = req.params;
+      try {
+        const blog = await blogCollection.findOneAndUpdate(
+          { slug },
+          { $inc: { views: 1 } }, // Increment the views field by 1
+          { new: true }
+        );
+        if (!blog) {
+          return res.status(404).send({ message: "Blog not found" });
+        }
+        res.send(blog);
+      } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+      }
     });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

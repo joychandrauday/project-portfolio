@@ -12,6 +12,8 @@ import Contact from "../pages/Contact/Contact";
 import Blog from "../pages/Blog/Blog";
 import ManageProjects from "../pages/AddProject/ManageProjects";
 import PrivateRoute from "./PrivateRoute";
+import SingleBlog from "../pages/Blog/SingleBlog";
+import CatWiseBlogs from "../pages/Blog/CatWiseBlogs";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ export const router = createBrowserRouter([
         element: <Blog />,
       },
       {
+        path: "/blog/:slug",
+        element: <SingleBlog />,
+      },
+      {
+        path: "/blogs/:category",
+        element: <CatWiseBlogs />,
+      },
+      {
         path: "/signup",
         element: <SignUp />,
       },
@@ -59,6 +69,14 @@ export const router = createBrowserRouter([
   },
   {
     path: "/manage-project",
+    element: (
+      <PrivateRoute>
+        <ManageProjects />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/manage-blogs",
     element: (
       <PrivateRoute>
         <ManageProjects />

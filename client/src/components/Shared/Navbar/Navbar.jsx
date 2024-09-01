@@ -1,20 +1,17 @@
 import React, { useContext } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
-import "./styles.css";
 import { IoMdSearch } from "react-icons/io";
 import { FiSidebar } from "react-icons/fi";
 import { TbLayoutBottombar, TbLayoutSidebarRight } from "react-icons/tb";
 import { MdOutlineViewSidebar } from "react-icons/md";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
-import { getAuth } from "firebase/auth";
-import { app } from "../../../firebase/firebase.config";
 import { AuthContext } from "../../../providers/AuthProvider";
+import "./styles.css";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const location = useLocation();
+  const admin = import.meta.env.VITE_MASTER_MAIL; // Updated environment variable access
 
   const tabList = [
     { name: "Home", path: "/" },
@@ -116,7 +113,7 @@ const Navbar = () => {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
-              <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
+              <img alt="User Avatar" src={user.photoURL} />
             </div>
           </div>
           <ul
@@ -124,14 +121,19 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-primary lg:mt-32 z-[999] p-2 shadow bg-base-100 rounded-box w-44"
           >
             <li>
-              <h1 className="text-basic block  font-extrabold">
-                welcome <div className="text-second">{user?.displayName}</div>
+              <h1 className="text-basic block font-extrabold">
+                Welcome <div className="text-second">{user?.displayName}</div>
               </h1>
             </li>
-            {user?.email === "joychandraud@gmail.com" && (
-              <li>
-                <a href="/manage-project">projects</a>
-              </li>
+            {user?.email === admin && (
+              <>
+                <li>
+                  <a href="/manage-project">Projects</a>
+                </li>
+                <li>
+                  <a href="/manage-blogs">Blogs</a>
+                </li>
+              </>
             )}
             <li>
               <div onClick={logOut}>Logout</div>
