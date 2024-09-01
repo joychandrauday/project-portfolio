@@ -55,6 +55,9 @@ async function run() {
     const blogCollection = client
       .db("portfolio-joychandrauday")
       .collection("blogs");
+    const categoryCollection = client
+      .db("portfolio-joychandrauday")
+      .collection("categories");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -132,6 +135,30 @@ async function run() {
     app.get("/blogs", async (req, res) => {
       const cursor = blogCollection.find();
       const result = await cursor.toArray();
+      res.send(result);
+    });
+    //blogs
+    app.get("/categories", async (req, res) => {
+      const cursor = categoryCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    //
+    // Create a new blog
+    app.post("/blogs", async (req, res) => {
+      try {
+        const newBlog = req.body;
+        const result = await blogCollection.insertOne(newBlog);
+        res.send(result);
+      } catch (err) {
+        res.status(400).json({ message: err.message });
+      }
+    });
+    app.delete("/blogs/:id", async (req, res) => {
+      const { id } = req.params;
+      const query = { _id: new ObjectId(id) };
+
+      const result = await blogCollection.deleteOne(query);
       res.send(result);
     });
     app.get("/blog/:slug", async (req, res) => {

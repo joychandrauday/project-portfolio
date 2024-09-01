@@ -56,7 +56,7 @@ const SingleBlog = () => {
     isLoading: relatedBlogsLoading,
     isError: relatedBlogsError,
   } = useRelatedBlog(blog?.category || "");
-  
+
   useEffect(() => {
     const incrementViewCount = async () => {
       try {
@@ -65,10 +65,10 @@ const SingleBlog = () => {
         console.error("Error incrementing view count:", error);
       }
     };
-  
+
     incrementViewCount();
-  }, [slug]); 
-  
+  }, [slug]);
+
   if (isLoading || relatedBlogsLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center backdrop-blur">
@@ -115,7 +115,7 @@ const SingleBlog = () => {
         commentData
       );
       console.log(response);
-      if (response.status===200) {
+      if (response.status === 200) {
         Swal.fire({
           title: "Success!",
           text: "Your Comment has been added.",
@@ -293,10 +293,10 @@ const SingleBlog = () => {
             comments.map((comment, index) => (
               <div
                 key={index}
-                className="bg-zinc-800 rounded-lg p-4 mb-4 flex items-center gap-4"
+                className="bg-zinc-800 rounded-lg p-4 mb-4 flex gap-4 bg-gradient-to-tr from-zinc-800 to-zinc-900 shadow-xl shadow-black lg:px-10 md:p-4  mx-auto flex-col items-start lg:flex-row w-5/6 ml-0"
               >
                 <div className="avatar">
-                  <div className="w-20 h-20 rounded-full overflow-hidden">
+                  <div className="w-16 h-16 rounded-full overflow-hidden">
                     <img src={comment.image} alt={comment.userName} />
                   </div>
                 </div>
@@ -306,8 +306,7 @@ const SingleBlog = () => {
                   </h3>
                   <p className="text-gray-300">{comment.comment}</p>
                   <p className="text-sm text-gray-500">
-                    {new Date(comment.commentDate).toLocaleDateString()}
-                    {' '}
+                    {new Date(comment.commentDate).toLocaleDateString()}{" "}
                     {new Date(comment.commentDate).toLocaleTimeString()}
                   </p>
                 </div>

@@ -14,6 +14,7 @@ import ManageProjects from "../pages/AddProject/ManageProjects";
 import PrivateRoute from "./PrivateRoute";
 import SingleBlog from "../pages/Blog/SingleBlog";
 import CatWiseBlogs from "../pages/Blog/CatWiseBlogs";
+import ManageBlog from "../pages/Blog/ManageBlog";
 
 export const router = createBrowserRouter([
   {
@@ -79,7 +80,7 @@ export const router = createBrowserRouter([
     path: "/manage-blogs",
     element: (
       <PrivateRoute>
-        <ManageProjects />
+        <ManageBlog />
       </PrivateRoute>
     ),
   },
